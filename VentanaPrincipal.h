@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include "findDialog.h"
 #include "DialogoDeshacer.h"
+#include "DialogoEstablecerColor.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -21,12 +22,13 @@ private:
     QTextEdit *texto;
 	QLabel *labelEstado;
 	QMenuBar *barra;
-	QMenu *fileMenu, *menuEditar;
-	QAction *accionSalir, *accionNuevo, *accionGuardar, *accionAbrir, *accionGuardarComo, *accionesFicherosRecientes[MAX_FICHEROS_RECIENTES], *accionBuscar, *accionDeshacer;
+	QMenu *fileMenu, *menuEditar, *menuConfiguracion;
+	QAction *accionSalir, *accionNuevo, *accionGuardar, *accionAbrir, *accionGuardarComo, *accionesFicherosRecientes[MAX_FICHEROS_RECIENTES], *accionBuscar, *accionDeshacer, *accionEstablecerColor;
 	QString nombreArchivo;
 	QStringList nombresFicherosRecientes;
 	FindDialog * dialogoBuscar;
 	DialogoDeshacer * dialogoDeshacer;
+	DialogoEstablecerColor * dialogoEstablecerColor;
 
 	void creaAcciones();
 	void creaMenus();
@@ -44,6 +46,8 @@ public slots:
 	void slotBuscarSiguiente(const QString &str, Qt::CaseSensitivity cs);
 	void slotDialogoDeshacer();
 	void slotDialogoDeshacerConecta(const QString &str, Qt::CaseSensitivity cs);
+	void slotDialogoEstablecerColor();
+	void slotPonColor(const QString &str, Qt::CaseSensitivity cs);
 
 };
 

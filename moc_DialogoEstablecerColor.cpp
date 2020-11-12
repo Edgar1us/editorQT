@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'DialogoDeshacer.h'
+** Meta object code from reading C++ file 'DialogoEstablecerColor.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "DialogoDeshacer.h"
+#include "DialogoEstablecerColor.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'DialogoDeshacer.h' doesn't include <QObject>."
+#error "The header file 'DialogoEstablecerColor.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.8. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,29 +20,29 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_DialogoDeshacer_t {
+struct qt_meta_stringdata_DialogoEstablecerColor_t {
     QByteArrayData data[4];
-    char stringdata0[52];
+    char stringdata0[56];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_DialogoDeshacer_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_DialogoEstablecerColor_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_DialogoDeshacer_t qt_meta_stringdata_DialogoDeshacer = {
+static const qt_meta_stringdata_DialogoEstablecerColor_t qt_meta_stringdata_DialogoEstablecerColor = {
     {
-QT_MOC_LITERAL(0, 0, 15), // "DialogoDeshacer"
-QT_MOC_LITERAL(1, 16, 17), // "slotBotonDeshacer"
-QT_MOC_LITERAL(2, 34, 0), // ""
-QT_MOC_LITERAL(3, 35, 16) // "slotBotonRehacer"
+QT_MOC_LITERAL(0, 0, 22), // "DialogoEstablecerColor"
+QT_MOC_LITERAL(1, 23, 15), // "slotBotonElegir"
+QT_MOC_LITERAL(2, 39, 0), // ""
+QT_MOC_LITERAL(3, 40, 15) // "slotBotonProbar"
 
     },
-    "DialogoDeshacer\0slotBotonDeshacer\0\0"
-    "slotBotonRehacer"
+    "DialogoEstablecerColor\0slotBotonElegir\0"
+    "\0slotBotonProbar"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_DialogoDeshacer[] = {
+static const uint qt_meta_data_DialogoEstablecerColor[] = {
 
  // content:
        8,       // revision
@@ -66,46 +66,46 @@ static const uint qt_meta_data_DialogoDeshacer[] = {
        0        // eod
 };
 
-void DialogoDeshacer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void DialogoEstablecerColor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<DialogoDeshacer *>(_o);
+        auto *_t = static_cast<DialogoEstablecerColor *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->slotBotonDeshacer(); break;
-        case 1: _t->slotBotonRehacer(); break;
+        case 0: _t->slotBotonElegir(); break;
+        case 1: _t->slotBotonProbar(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject DialogoDeshacer::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject DialogoEstablecerColor::staticMetaObject = { {
     &QDialog::staticMetaObject,
-    qt_meta_stringdata_DialogoDeshacer.data,
-    qt_meta_data_DialogoDeshacer,
+    qt_meta_stringdata_DialogoEstablecerColor.data,
+    qt_meta_data_DialogoEstablecerColor,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *DialogoDeshacer::metaObject() const
+const QMetaObject *DialogoEstablecerColor::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *DialogoDeshacer::qt_metacast(const char *_clname)
+void *DialogoEstablecerColor::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_DialogoDeshacer.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_DialogoEstablecerColor.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "Ui::DialogoDeshacer"))
-        return static_cast< Ui::DialogoDeshacer*>(this);
+    if (!strcmp(_clname, "Ui::DialogoEstablecerColor"))
+        return static_cast< Ui::DialogoEstablecerColor*>(this);
     return QDialog::qt_metacast(_clname);
 }
 
-int DialogoDeshacer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int DialogoEstablecerColor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)

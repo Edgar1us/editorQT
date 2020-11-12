@@ -9,19 +9,23 @@
 #include <QDebug>
 #include <QStringList>
 #include <QVariant>
+#include <QColor>
+#include <QPalette>
+
 
 VentanaPrincipal::VentanaPrincipal(QWidget *parent) : QMainWindow(parent)
 {
 
 	setWindowIcon(QIcon("../../../Imatges/capa.png"));
-	
+
 	creaAcciones();
 	creaMenus();
 
 	dialogoBuscar = NULL;
 	dialogoDeshacer = NULL;
+	dialogoEstablecerColor = NULL;
 
-	resize(600,400);
+	resize(600, 400);
 }
 
 /*FUNCIONES*********************************************************************************************************************************************************/
@@ -35,14 +39,13 @@ void VentanaPrincipal::creaAcciones()
 	accionGuardarComo = new QAction("Guardar como");
 	accionBuscar = new QAction("Buscar");
 	accionDeshacer = new QAction("Deshacer");
+	accionEstablecerColor = new QAction("Establecer color");
 
 	for (int i = 0; i < MAX_FICHEROS_RECIENTES; i++)
 	{
 		accionesFicherosRecientes[i] = new QAction("");
 		accionesFicherosRecientes[i]->setVisible(false);
 	}
-	
-	
 
 	accionSalir->setIcon(QIcon("../../../Imatges/salir.png"));
 	accionSalir->setShortcut(QKeySequence::Quit);
@@ -64,7 +67,6 @@ void VentanaPrincipal::creaAcciones()
 
 	accionDeshacer->setIcon(QIcon("../../../Imatges/salir.png"));
 	accionDeshacer->setShortcut(QKeySequence::Find);
-	
 
 	connect(accionSalir, SIGNAL(triggered()),
 			this, SLOT(close()));
@@ -87,11 +89,14 @@ void VentanaPrincipal::creaAcciones()
 	connect(accionDeshacer, SIGNAL(triggered()),
 			this, SLOT(slotDialogoDeshacer()));
 
-	for (int i = 0; i < MAX_FICHEROS_RECIENTES; i++){
+	connect(accionEstablecerColor, SIGNAL(triggered()),
+			this, SLOT(slotDialogoEstablecerColor()));
+
+	for (int i = 0; i < MAX_FICHEROS_RECIENTES; i++)
+	{
 		connect(accionesFicherosRecientes[i], SIGNAL(triggered()),
-			this, SLOT(slotFicherosRecientes()));
+				this, SLOT(slotFicherosRecientes()));
 	}
-	
 }
 
 void VentanaPrincipal::creaMenus()
@@ -103,7 +108,7 @@ void VentanaPrincipal::creaMenus()
 	QMenuBar *barra = menuBar();
 	fileMenu = barra->addMenu(QString("File"));
 	menuEditar = barra->addMenu(QString("Editor"));
-	
+	menuConfiguracion = barra->addMenu("Configuracion");
 
 	/*MENU GENERAL********************************************************************************************/
 	texto->addAction(accionSalir);
@@ -130,21 +135,22 @@ void VentanaPrincipal::creaMenus()
 	fileMenu->addAction(accionNuevo);
 	fileMenu->addAction(accionAbrir);
 	fileMenu->addAction(accionGuardarComo);
-	
+
 	for (int i = 0; i < MAX_FICHEROS_RECIENTES; i++)
 	{
 		fileMenu->addAction(accionesFicherosRecientes[i]);
 	}
-	
+
 	menuEditar->addAction(accionBuscar);
 	menuEditar->addAction(accionDeshacer);
+
+	menuConfiguracion->addAction(accionEstablecerColor);
 
 	/*BARRA DE ESTADO ***************************************************************************************/
 
 	labelEstado = new QLabel("Aplicacion lista para usted");
 	statusBar()->addWidget(labelEstado);
 }
-
 
 void VentanaPrincipal::abrirArchivo(QString ruta)
 {
@@ -162,8 +168,6 @@ void VentanaPrincipal::abrirArchivo(QString ruta)
 	while (!stream.atEnd())
 	{
 		texto->append(stream.readLine());
-		
-		
 	}
 	nombreArchivo = ruta;
 	setWindowTitle(nombreArchivo);
@@ -187,9 +191,9 @@ void VentanaPrincipal::guardarComo(QString ruta)
 	archivo.close();
 }
 
-void VentanaPrincipal::establecerFicheroActual(const QString & nuevaRuta){
+void VentanaPrincipal::establecerFicheroActual(const QString &nuevaRuta)
+{
 
-	
 	nombresFicherosRecientes.removeAll(nuevaRuta);
 	nombresFicherosRecientes.prepend(nuevaRuta);
 	nombreArchivo = nuevaRuta;
@@ -200,10 +204,6 @@ void VentanaPrincipal::establecerFicheroActual(const QString & nuevaRuta){
 	{
 		accionesFicherosRecientes[i]->setVisible(false);
 	}
-	
-	
-	
-	
 
 	for (int i = 0; i < nombresFicherosRecientes.length() && i < MAX_FICHEROS_RECIENTES; i++)
 	{
@@ -214,10 +214,6 @@ void VentanaPrincipal::establecerFicheroActual(const QString & nuevaRuta){
 		QVariant dato(rutaMirada);
 		accionesFicherosRecientes[i]->setData(dato);
 	}
-
-	
-	
-
 }
 
 /*SLOTS*********************************************************************************************************************************************************/
@@ -257,16 +253,16 @@ void VentanaPrincipal::slotGuardarComo()
 	}
 }
 
+void VentanaPrincipal::slotGuardar()
+{
 
-void VentanaPrincipal::slotGuardar(){
-	
-	if (nombreArchivo.isEmpty()) return slotGuardarComo();
-		guardarComo(nombreArchivo);
-
-
+	if (nombreArchivo.isEmpty())
+		return slotGuardarComo();
+	guardarComo(nombreArchivo);
 }
 
-void VentanaPrincipal::slotFicherosRecientes(){
+void VentanaPrincipal::slotFicherosRecientes()
+{
 
 	QString textoEntrada;
 
@@ -278,24 +274,20 @@ void VentanaPrincipal::slotFicherosRecientes(){
 	QVariant dato = aC->data();
 
 	QString rutaCompleta = dato.toString();
-	
-	abrirArchivo(rutaCompleta);
-	
 
+	abrirArchivo(rutaCompleta);
 }
 
-void VentanaPrincipal::slotDialogoBuscar(){
+void VentanaPrincipal::slotDialogoBuscar()
+{
 
 	if (dialogoBuscar == NULL)
 	{
 		dialogoBuscar = new FindDialog(this);
 
 		connect(dialogoBuscar, SIGNAL(findNext(const QString &, Qt::CaseSensitivity)),
-			this, SLOT(slotBuscarSiguiente(const QString &, Qt::CaseSensitivity)));
-		
+				this, SLOT(slotBuscarSiguiente(const QString &, Qt::CaseSensitivity)));
 	}
-	
-	
 
 	/*MODAL = bloquea la vida
 	dialogoBuscar->exec();
@@ -303,12 +295,37 @@ void VentanaPrincipal::slotDialogoBuscar(){
 
 	//NO MODAL
 	dialogoBuscar->show();
-
-
-
 }
 
-void VentanaPrincipal::slotBuscarSiguiente(const QString &str, Qt::CaseSensitivity cs){
+void VentanaPrincipal::slotDialogoEstablecerColor()
+{
+
+	if (dialogoEstablecerColor == NULL)
+	{
+		dialogoEstablecerColor = new DialogoEstablecerColor(this);
+
+		
+	}
+
+	dialogoEstablecerColor->show();
+}
+
+void VentanaPrincipal::slotPonColor(const QString &str, Qt::CaseSensitivity cs)
+{
+
+	if (!texto->find(str))
+	{
+		QColor color = QColor(150, 246, 150);
+		QPalette p = texto->palette();
+
+		p.setColor(QPalette::Base, color);
+		p.setColor(QPalette::Text, Qt::magenta);
+		texto->setPalette(p);
+	}
+}
+
+void VentanaPrincipal::slotBuscarSiguiente(const QString &str, Qt::CaseSensitivity cs)
+{
 
 	//qDebug() << "La cadena que me han pasado es: " << str;
 
@@ -316,26 +333,22 @@ void VentanaPrincipal::slotBuscarSiguiente(const QString &str, Qt::CaseSensitivi
 	{
 		texto->moveCursor(QTextCursor::Start);
 	}
-	
-	
-
 }
 
-void VentanaPrincipal::slotDialogoDeshacer(){
+void VentanaPrincipal::slotDialogoDeshacer()
+{
 
 	if (dialogoDeshacer == NULL)
 	{
 		dialogoDeshacer = new DialogoDeshacer(this);
 		connect(dialogoDeshacer, SIGNAL(findNext(const QString &, Qt::CaseSensitivity)),
-			this, SLOT(slotDialogoDeshacerConecta(const QString &, Qt::CaseSensitivity)));
+				this, SLOT(slotDialogoDeshacerConecta(const QString &, Qt::CaseSensitivity)));
 	}
 
 	dialogoDeshacer->show();
-
-
-
 }
 
-void VentanaPrincipal::slotDialogoDeshacerConecta(const QString &str, Qt::CaseSensitivity cs){
+void VentanaPrincipal::slotDialogoDeshacerConecta(const QString &str, Qt::CaseSensitivity cs)
+{
 	qDebug() << "Comunicando" << str;
 }

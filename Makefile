@@ -53,16 +53,20 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = DialogoDeshacer.cpp \
+		DialogoEstablecerColor.cpp \
 		findDialog.cpp \
 		main.cpp \
 		VentanaPrincipal.cpp moc_DialogoDeshacer.cpp \
+		moc_DialogoEstablecerColor.cpp \
 		moc_findDialog.cpp \
 		moc_VentanaPrincipal.cpp
 OBJECTS       = DialogoDeshacer.o \
+		DialogoEstablecerColor.o \
 		findDialog.o \
 		main.o \
 		VentanaPrincipal.o \
 		moc_DialogoDeshacer.o \
+		moc_DialogoEstablecerColor.o \
 		moc_findDialog.o \
 		moc_VentanaPrincipal.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -145,8 +149,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		editor.pro DialogoDeshacer.h \
+		DialogoEstablecerColor.h \
 		findDialog.h \
 		VentanaPrincipal.h DialogoDeshacer.cpp \
+		DialogoEstablecerColor.cpp \
 		findDialog.cpp \
 		main.cpp \
 		VentanaPrincipal.cpp
@@ -158,7 +164,7 @@ TARGET        = editor
 first: all
 ####### Build rules
 
-editor: ui_DialogoDeshacer.h $(OBJECTS)  
+editor: ui_DialogoDeshacer.h ui_DialogoEstablecerColor.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: editor.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -337,9 +343,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents DialogoDeshacer.h findDialog.h VentanaPrincipal.h $(DISTDIR)/
-	$(COPY_FILE) --parents DialogoDeshacer.cpp findDialog.cpp main.cpp VentanaPrincipal.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents DialogoDeshacer.ui $(DISTDIR)/
+	$(COPY_FILE) --parents DialogoDeshacer.h DialogoEstablecerColor.h findDialog.h VentanaPrincipal.h $(DISTDIR)/
+	$(COPY_FILE) --parents DialogoDeshacer.cpp DialogoEstablecerColor.cpp findDialog.cpp main.cpp VentanaPrincipal.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents DialogoDeshacer.ui DialogoEstablecerColor.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -371,14 +377,20 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -w -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_DialogoDeshacer.cpp moc_findDialog.cpp moc_VentanaPrincipal.cpp
+compiler_moc_header_make_all: moc_DialogoDeshacer.cpp moc_DialogoEstablecerColor.cpp moc_findDialog.cpp moc_VentanaPrincipal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_DialogoDeshacer.cpp moc_findDialog.cpp moc_VentanaPrincipal.cpp
+	-$(DEL_FILE) moc_DialogoDeshacer.cpp moc_DialogoEstablecerColor.cpp moc_findDialog.cpp moc_VentanaPrincipal.cpp
 moc_DialogoDeshacer.cpp: DialogoDeshacer.h \
 		ui_DialogoDeshacer.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/mati/interfaces/Qt/editor/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/mati/interfaces/Qt/editor -I/home/mati/interfaces/Qt/editor -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include DialogoDeshacer.h -o moc_DialogoDeshacer.cpp
+
+moc_DialogoEstablecerColor.cpp: DialogoEstablecerColor.h \
+		ui_DialogoEstablecerColor.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/mati/interfaces/Qt/editor/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/mati/interfaces/Qt/editor -I/home/mati/interfaces/Qt/editor -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include DialogoEstablecerColor.h -o moc_DialogoEstablecerColor.cpp
 
 moc_findDialog.cpp: findDialog.h \
 		moc_predefs.h \
@@ -387,6 +399,10 @@ moc_findDialog.cpp: findDialog.h \
 
 moc_VentanaPrincipal.cpp: VentanaPrincipal.h \
 		findDialog.h \
+		DialogoDeshacer.h \
+		ui_DialogoDeshacer.h \
+		DialogoEstablecerColor.h \
+		ui_DialogoEstablecerColor.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/mati/interfaces/Qt/editor/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/mati/interfaces/Qt/editor -I/home/mati/interfaces/Qt/editor -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include VentanaPrincipal.h -o moc_VentanaPrincipal.cpp
@@ -395,12 +411,16 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_DialogoDeshacer.h
+compiler_uic_make_all: ui_DialogoDeshacer.h ui_DialogoEstablecerColor.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_DialogoDeshacer.h
+	-$(DEL_FILE) ui_DialogoDeshacer.h ui_DialogoEstablecerColor.h
 ui_DialogoDeshacer.h: DialogoDeshacer.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic DialogoDeshacer.ui -o ui_DialogoDeshacer.h
+
+ui_DialogoEstablecerColor.h: DialogoEstablecerColor.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic DialogoEstablecerColor.ui -o ui_DialogoEstablecerColor.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -416,19 +436,34 @@ DialogoDeshacer.o: DialogoDeshacer.cpp DialogoDeshacer.h \
 		ui_DialogoDeshacer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DialogoDeshacer.o DialogoDeshacer.cpp
 
+DialogoEstablecerColor.o: DialogoEstablecerColor.cpp DialogoEstablecerColor.h \
+		ui_DialogoEstablecerColor.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DialogoEstablecerColor.o DialogoEstablecerColor.cpp
+
 findDialog.o: findDialog.cpp findDialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o findDialog.o findDialog.cpp
 
 main.o: main.cpp VentanaPrincipal.h \
-		findDialog.h
+		findDialog.h \
+		DialogoDeshacer.h \
+		ui_DialogoDeshacer.h \
+		DialogoEstablecerColor.h \
+		ui_DialogoEstablecerColor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 VentanaPrincipal.o: VentanaPrincipal.cpp VentanaPrincipal.h \
-		findDialog.h
+		findDialog.h \
+		DialogoDeshacer.h \
+		ui_DialogoDeshacer.h \
+		DialogoEstablecerColor.h \
+		ui_DialogoEstablecerColor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VentanaPrincipal.o VentanaPrincipal.cpp
 
 moc_DialogoDeshacer.o: moc_DialogoDeshacer.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DialogoDeshacer.o moc_DialogoDeshacer.cpp
+
+moc_DialogoEstablecerColor.o: moc_DialogoEstablecerColor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DialogoEstablecerColor.o moc_DialogoEstablecerColor.cpp
 
 moc_findDialog.o: moc_findDialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_findDialog.o moc_findDialog.cpp

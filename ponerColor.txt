@@ -1,0 +1,9 @@
+QColor color = QColorDialog::execute()
+
+
+QColor color = QColor(150,246,150);
+QPalette p = texto->palette();
+
+p.setColor(QPalette::Base, color);
+p.setColor(QPalette::Text, QT::magenta);
+texto->setPalette(p);
