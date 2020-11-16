@@ -4,6 +4,10 @@
 #include "ui_DialogoEstablecerColor.h"
 #include <QTextEdit>
 #include <QColorDialog>
+#include <QPalette>
+#include <QColor>
+#include <QVector>
+
 
 class DialogoEstablecerColor : public QDialog, public Ui::DialogoEstablecerColor
 {
@@ -20,8 +24,14 @@ private slots:
 
 private:
     
-    QTextEdit * editorCentral;
+    QTextEdit *punteroATextEdit;
     QColorDialog d;
+    QColor colorElegido;
+    QPalette paletaOriginal;
+    QVector<QColor> listaColores;
+
+    void hideEvent(QHideEvent * event);
+    void closeEvent(QCloseEvent * event);
 
 };
 

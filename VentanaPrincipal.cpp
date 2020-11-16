@@ -24,6 +24,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent) : QMainWindow(parent)
 	dialogoBuscar = NULL;
 	dialogoDeshacer = NULL;
 	dialogoEstablecerColor = NULL;
+	dialogoColoresUsados = NULL;
 
 	resize(600, 400);
 }
@@ -310,18 +311,17 @@ void VentanaPrincipal::slotDialogoEstablecerColor()
 	dialogoEstablecerColor->show();
 }
 
-void VentanaPrincipal::slotPonColor(const QString &str, Qt::CaseSensitivity cs)
-{
+void VentanaPrincipal::slotDialogoColoresUsados(){
 
-	if (!texto->find(str))
+	if (dialogoEstablecerColor == NULL)
 	{
-		QColor color = QColor(150, 246, 150);
-		QPalette p = texto->palette();
+		dialogoEstablecerColor = new DialogoEstablecerColor(this);
 
-		p.setColor(QPalette::Base, color);
-		p.setColor(QPalette::Text, Qt::magenta);
-		texto->setPalette(p);
+		
 	}
+
+	dialogoEstablecerColor->show();
+
 }
 
 void VentanaPrincipal::slotBuscarSiguiente(const QString &str, Qt::CaseSensitivity cs)
@@ -352,3 +352,4 @@ void VentanaPrincipal::slotDialogoDeshacerConecta(const QString &str, Qt::CaseSe
 {
 	qDebug() << "Comunicando" << str;
 }
+

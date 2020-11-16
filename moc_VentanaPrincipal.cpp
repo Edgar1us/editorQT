@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VentanaPrincipal_t {
     QByteArrayData data[16];
-    char stringdata0[240];
+    char stringdata0[252];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -46,7 +46,7 @@ QT_MOC_LITERAL(11, 150, 2), // "cs"
 QT_MOC_LITERAL(12, 153, 19), // "slotDialogoDeshacer"
 QT_MOC_LITERAL(13, 173, 26), // "slotDialogoDeshacerConecta"
 QT_MOC_LITERAL(14, 200, 26), // "slotDialogoEstablecerColor"
-QT_MOC_LITERAL(15, 227, 12) // "slotPonColor"
+QT_MOC_LITERAL(15, 227, 24) // "slotDialogoColoresUsados"
 
     },
     "VentanaPrincipal\0slotNuevo\0\0slotAbrir\0"
@@ -55,7 +55,8 @@ QT_MOC_LITERAL(15, 227, 12) // "slotPonColor"
     "slotBuscarSiguiente\0str\0Qt::CaseSensitivity\0"
     "cs\0slotDialogoDeshacer\0"
     "slotDialogoDeshacerConecta\0"
-    "slotDialogoEstablecerColor\0slotPonColor"
+    "slotDialogoEstablecerColor\0"
+    "slotDialogoColoresUsados"
 };
 #undef QT_MOC_LITERAL
 
@@ -83,7 +84,7 @@ static const uint qt_meta_data_VentanaPrincipal[] = {
       12,    0,   80,    2, 0x0a /* Public */,
       13,    2,   81,    2, 0x0a /* Public */,
       14,    0,   86,    2, 0x0a /* Public */,
-      15,    2,   87,    2, 0x0a /* Public */,
+      15,    0,   87,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -96,7 +97,7 @@ static const uint qt_meta_data_VentanaPrincipal[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString, 0x80000000 | 10,    9,   11,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString, 0x80000000 | 10,    9,   11,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -117,7 +118,7 @@ void VentanaPrincipal::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 7: _t->slotDialogoDeshacer(); break;
         case 8: _t->slotDialogoDeshacerConecta((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< Qt::CaseSensitivity(*)>(_a[2]))); break;
         case 9: _t->slotDialogoEstablecerColor(); break;
-        case 10: _t->slotPonColor((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< Qt::CaseSensitivity(*)>(_a[2]))); break;
+        case 10: _t->slotDialogoColoresUsados(); break;
         default: ;
         }
     }

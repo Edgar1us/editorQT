@@ -11,6 +11,7 @@
 #include "findDialog.h"
 #include "DialogoDeshacer.h"
 #include "DialogoEstablecerColor.h"
+#include "DialogoColoresUsados.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -29,6 +30,7 @@ private:
 	FindDialog * dialogoBuscar;
 	DialogoDeshacer * dialogoDeshacer;
 	DialogoEstablecerColor * dialogoEstablecerColor;
+	DialogoColoresUsados * dialogoColoresUsados;
 
 	void creaAcciones();
 	void creaMenus();
@@ -47,7 +49,8 @@ public slots:
 	void slotDialogoDeshacer();
 	void slotDialogoDeshacerConecta(const QString &str, Qt::CaseSensitivity cs);
 	void slotDialogoEstablecerColor();
-	void slotPonColor(const QString &str, Qt::CaseSensitivity cs);
+	void slotDialogoColoresUsados();
+	
 
 };
 
